@@ -1,0 +1,14 @@
+<div class="main">
+    <div class="home__container" *ngFor="let game of gameContent">
+        <a [routerLink]="['details', game.id]">
+            <app-card
+                [id]="game.id"
+                [gameCover]="game.gameCover"
+                [gameLabel]="game.gameLabel"
+                [gameType]="game.gameType"
+                [gamePrice]="game.gamePrice"
+            >
+            </app-card>
+        </a>
+    </div>
+</div>

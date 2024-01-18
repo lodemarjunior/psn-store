@@ -1,0 +1,17 @@
+<div class="main">
+    <div class="image">
+        <img src="{{foto}}" alt="">
+    </div>
+    <div class="details">
+        <h1>{{title}}</h1>
+        <p>{{description}}</p>
+    </div>
+    <div class="buy">
+        <button class="myButton" (click)="decrease()">-</button>
+        <label>{{quantity}}</label>
+        <button class="myButton" (click)="add()">+</button>
+    </div>
+    <div>
+        <button class="myButton" (click)="addCart(id, quantity)">Adicionar ao carrinho</button>
+    </div>
+</div>
