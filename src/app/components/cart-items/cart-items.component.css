@@ -1,34 +1,62 @@
 .main {
     width: 40%;
-    height: 150px;
-    border: 1px solid red;
+    border: 1px solid #000;
+    border-radius: 10px;
+    margin: 5px 10px;
     background-color: #fff;
+    max-height: 50vh;
+    overflow-y: auto;
+    position: absolute;
+    z-index: 99999;
 }
 
 .item {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
+}
+
+.image {
+    height: 130px;
 }
 
 .image > img {
-    height: 130px;
-    margin: 10px;
+    height: 100%;
     border: 1px solid #000;
+    border-radius: 3px;
 }
 
 .content {
     display: flex;
     flex-direction: column;
-    margin: 10px 0;
-    width: 65%;
-    border: 1px solid green;
+    max-width: 100%;
+    border: 1px solid #000;
+    border-radius: 3px;
+    margin: 0 5px;
+    text-wrap: wrap;
+    height: 130px;
+    overflow-y: scroll;
+}
+
+.content > h2 {
+    margin: 0 2px 0 2px;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+}
+
+.content > p {
+    margin: 2px;
 }
 
 .quantity {
     display: flex;
     align-items: center;
-    justify-self: center;
-    border: 1px solid turquoise;
-    margin: 10px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    padding: 0 10px;
+    height: 130px;
 }
 
 .quantity > label {

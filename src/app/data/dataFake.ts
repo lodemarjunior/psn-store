@@ -1,4 +1,6 @@
-export const dataFake = [
+import { GameContent } from "../interfaces/game-content";
+
+export const dataFake: GameContent[] = [
     {
         "id": "1",
         "title": "Battlefield 1",

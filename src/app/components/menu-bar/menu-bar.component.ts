@@ -8,8 +8,10 @@ import { CartService } from 'src/app/services/cart.service';
 })
 export class MenuBarComponent implements OnInit {
   quantity: number = 0;
+  display: boolean = false;
   
-  constructor(private cart:CartService) {    
+  constructor(private cart:CartService) {
+    this.quantity = this.cart.items.length;
   }
 
   ngOnInit(): void {
@@ -17,5 +19,9 @@ export class MenuBarComponent implements OnInit {
     this.cart.cartUpdated.subscribe(() => {
       this.quantity = this.cart.items.length;
     });
+  }
+
+  openCart() {
+    this.cart.openCart();
   }
 }

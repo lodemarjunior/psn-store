@@ -1,7 +1,6 @@
 .cart-items {
     position: absolute;
-    width: 100%;
     display: flex;
     justify-content: flex-end;
-    z-index: 9999;
+    width: 100%;
 }

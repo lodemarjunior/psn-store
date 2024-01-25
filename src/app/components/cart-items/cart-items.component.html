@@ -1,15 +1,15 @@
-<div class="main">
-    <div class="item">
+<div class="main" #mainCart *ngIf="display">
+    <div class="item" *ngFor="let item of items">
         <div class="image">
-            <img src="../../../assets/ac-cover.jpg">
+            <img src="{{getItemData(item.id).gameCover}}">
         </div>
         <div class="content">
-            <h2>Titulo aqui</h2>
-            <p>Descricao aqui</p>
+            <h2>{{getItemData(item.id).title}}</h2>
+            <p>{{getItemData(item.id).gameDescription}}</p>
         </div>
         <div class="quantity">
             <button class="myButton">-</button>
-            <label>0</label>
+            <label>{{item.quantity}}</label>
             <button class="myButton">+</button>
         </div>
     </div>
