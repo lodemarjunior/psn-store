@@ -57,7 +57,7 @@
     width: 35px;
     margin-right: 15px;
     cursor: pointer;
-    z-index: 1;
+    z-index: 3;
 }
 
 .menu-bar__cart > label {
@@ -71,4 +71,5 @@
     font-size: 15px;
     font-weight: bold;
     height: 13px;
+    cursor: pointer;
 }

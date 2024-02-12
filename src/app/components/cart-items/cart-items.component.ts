@@ -1,4 +1,4 @@
-import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { dataFake } from 'src/app/data/dataFake';
 import { CartService } from 'src/app/services/cart.service';
 
@@ -12,7 +12,7 @@ export class CartItemsComponent implements OnInit {
   gameData: any[] = dataFake; // Adiciona o array de dados
   display: boolean = false;
 
-  constructor(private cart:CartService, private elRef: ElementRef) {
+  constructor(private cart:CartService) {
     this.items = this.cart.items;
   }
   
@@ -28,21 +28,88 @@ export class CartItemsComponent implements OnInit {
     // Função que retorna os dados do item correspondente ao ID
     return this.gameData.find(item => item.id === id);
   }
+  
+  closeCart(): void {
+    this.cart.closeCart();
+  }
 
-  // Ouvinte de evento de clique no documento
-  @HostListener('document:click', ['$event'])
-  onClick(event: Event): void {
-    const targetElement = event.target as HTMLElement;
+  add(id: string | null): void {
+    let newItem: {id: string | null, quantity: number} = { id: null, quantity: 0 };
 
-    console.log("this.display == "+this.display);
-    console.log("targetElement.id.includes(mainCart) == "+targetElement.id.includes("mainCart"));
+    this.cart.items.find(e => {
+      if (e.id === id) {
+        e.quantity += 1;
+        newItem = {id: id, quantity: e.quantity};
+      }
+    });
 
-    if (!this.elRef.nativeElement.contains(event.target) && !targetElement.id.includes("mainCart")) {
-      this.closeCart();
+    this.cart.addLocalStorage(newItem);
+    this.cart.cartUpdated.emit();
+  }
+
+  decrease(id: string | null): void {
+    let newItem: {id: string | null, quantity: number} = { id: null, quantity: 0 };
+
+    for (let i=0; i<this.cart.items.length; i++) {
+      const e = this.cart.items[i];
+
+      if (e.id === id) {
+        e.quantity -= 1;
+
+        if (e.quantity === 0) {
+          if (this.removeItem(id)) {
+            break;
+          } else {
+            e.quantity += 1;
+            break;
+          }
+        } else {
+          newItem = {id: id, quantity: e.quantity};
+          this.cart.addLocalStorage(newItem);
+          this.cart.cartUpdated.emit();
+          break; // Sai do loop assim que o item for encontrado
+        }
+      }
     }
   }
 
-  closeCart(): void {
-    this.cart.closeCart();
+  removeItem(id: string | null): boolean {
+    if (confirm("Deseja realmente excluir este item do carrinho?")) {
+      let cartItems = localStorage.getItem('cart');
+
+      for (let i=0; i<this.cart.items.length; i++) {
+        const e = this.cart.items[i];
+  
+        if (e.id === id) { 
+          this.cart.items.splice(i, 1);
+          break;
+        }
+      }
+        
+      if (cartItems) {
+        let items: { id: string, quantity: number }[] = JSON.parse(cartItems);
+    
+        // Encontre o item com o ID correspondente
+        const itemToRemove = items.find(item => item.id === id);
+    
+        if (itemToRemove) {
+          // Se o item for encontrado, você pode removê-lo do array
+          const index = items.indexOf(itemToRemove);
+
+          if (index !== -1) {
+            items.splice(index, 1);
+          }
+        }
+    
+        // Atualize o localStorage com o novo array de itens
+        localStorage.setItem('cart', JSON.stringify(items));
+      }
+
+      this.cart.cartUpdated.emit();
+
+      return true;
+    }
+
+    return false;
   }
 }

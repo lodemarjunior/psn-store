@@ -1,3 +1,5 @@
+<div class="cartListBackground" (click)="closeCart()" *ngIf="display"></div>
+
 <div class="main" #mainCart *ngIf="display">
     <div class="item" *ngFor="let item of items">
         <div class="image">
@@ -7,10 +9,18 @@
             <h2>{{getItemData(item.id).title}}</h2>
             <p>{{getItemData(item.id).gameDescription}}</p>
         </div>
-        <div class="quantity">
-            <button class="myButton">-</button>
-            <label>{{item.quantity}}</label>
-            <button class="myButton">+</button>
+        <div class="addDecrease">
+            <div class="deleteButton hidden">
+                <img class="lixeira" src="../../../assets/lixeira.png">
+            </div>
+            <div class="quantity">
+                <button class="myButton" (click)="decrease(item.id)">-</button>
+                <label>{{item.quantity}}</label>
+                <button class="myButton" (click)="add(item.id)">+</button>
+            </div>
+            <div class="deleteButton">
+                <img class="lixeira" src="../../../assets/lixeira.png" (click)="removeItem(item.id)">
+            </div>
         </div>
     </div>
 </div>

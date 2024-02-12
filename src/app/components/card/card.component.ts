@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-card',
@@ -16,4 +17,11 @@ export class CardComponent {
   gameType: string = "";
   @Input()
   gamePrice: string = "";
+
+  constructor(private cart:CartService) {
+  }
+
+  closeCart(): void {
+    this.cart.closeCart();
+  }
 }

@@ -25,6 +25,7 @@
     height: 100%;
     border: 1px solid #000;
     border-radius: 3px;
+    width: 88px;
 }
 
 .content {
@@ -50,13 +51,19 @@
     margin: 2px;
 }
 
+.addDecrease {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #000;
+    height: 130px;
+}
+
 .quantity {
     display: flex;
     align-items: center;
-    border: 1px solid #000;
     border-radius: 3px;
     padding: 0 10px;
-    height: 130px;
+    flex-grow: 1;
 }
 
 .quantity > label {
@@ -87,4 +94,27 @@
 .myButton:active {
 	position:relative;
 	top:1px;
+}
+
+.cartListBackground {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    z-index: 1;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.deleteButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.lixeira {
+    height: 20px;
+    margin: 10px;
+    cursor: pointer;
 }

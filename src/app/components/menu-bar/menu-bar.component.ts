@@ -21,7 +21,15 @@ export class MenuBarComponent implements OnInit {
     });
   }
 
-  openCart() {
-    this.cart.openCart();
+  openCart(): void {
+    if (this.cart.display) {
+      this.cart.closeCart();
+    } else {
+      this.cart.openCart();
+    }
+  }
+  
+  closeCart(): void {
+    this.cart.closeCart();
   }
 }

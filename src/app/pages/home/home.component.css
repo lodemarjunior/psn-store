@@ -5,6 +5,7 @@
 
 .home__container {
     margin: auto;
+    z-index: 2;
 }
 
 .appMenu {
